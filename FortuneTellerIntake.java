@@ -1,4 +1,4 @@
-package src.test.java;
+
 //import org.junit.Assert.assertEquals;
 
 import java.lang.reflect.InvocationTargetException;
@@ -6,14 +6,13 @@ import java.lang.reflect.Method;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Optional;
-
-import org.junit.Test;
+//import org.junit.Test;
 
 public class FortuneTellerIntake {
 	
 	public FortuneTellerIntake()
 	{
-		super();
+	    super();
 	}
 	
 	public void promptFirstName()
@@ -30,10 +29,10 @@ public class FortuneTellerIntake {
 	public void confirmFirstName(String input, String sMethodSuffix, String sMethodPrefix)
 	{
 		try {
-			final Class<?> oClass = Class.forName("FortuneTeller");
+			final Class<?> oClass = Class.forName("FortuneTellerIntake");
 			String s = sMethodPrefix + sMethodSuffix;
 			Method m = oClass.getDeclaredMethod(s, String.class);
-			Optional<String> test = Optional.ofNullable(String.valueOf(m.invoke(null, input)));
+			Optional<String> test = Optional.ofNullable(String.valueOf(m.invoke(this, input)));
 			String oOptionalOutput = test.orElse("");
 			System.out.printf("The first name is %s. Is that corrrect? (yes or no)\n", String.join("",String.join("", oOptionalOutput.split("Optional\\[")).split("\\]"))); //oParsed.valueOf());
 			
@@ -56,10 +55,10 @@ public class FortuneTellerIntake {
 	public void confirmLastName(String input, String sMethodSuffix, String sMethodPrefix)
 	{
 		try {
-			final Class<?> oClass = Class.forName("FortuneTeller");
+			final Class<?> oClass = Class.forName("FortuneTellerIntake");
 			String s = sMethodPrefix + sMethodSuffix;
 			Method m = oClass.getDeclaredMethod(s, String.class);
-			Optional<String> test = Optional.ofNullable(String.valueOf(m.invoke(null, input)));
+			Optional<String> test = Optional.ofNullable(String.valueOf(m.invoke(this, input)));
 			String oOptionalOutput = test.orElse("");
 			System.out.printf(
 					"The last name is %s. Is that corrrect? (yes or no)\n",
@@ -81,14 +80,15 @@ public class FortuneTellerIntake {
 	{
 		System.out.println("Your age: ");
 	}
-	
+
+	@SuppressWarnings ("unchecked")
 	public void confirmAge(String input, String sMethodSuffix, String sMethodPrefix)
 	{
 		try {
-			final Class<?> oClass = Class.forName("FortuneTeller");
+			final Class<?> oClass = Class.forName("FortuneTellerIntake");
 			String s = sMethodPrefix + sMethodSuffix;
 			Method m = oClass.getDeclaredMethod(s, String.class);
-			Optional<Short> test = (Optional<Short>)m.invoke(null, input); //((Optional<Short>)m.invoke(null, input)).orElse((short)-1);
+			Optional<Short> test = (Optional<Short>)m.invoke(this, input); //((Optional<Short>)m.invoke(null, input)).orElse((short)-1);
 			System.out.printf("The age is %d. Is that corrrect? (yes or no)\n", test.orElse((short)-1));
 			
 		} catch (ClassNotFoundException e) {
@@ -107,13 +107,14 @@ public class FortuneTellerIntake {
 		System.out.println("Your birth month number, starting with 1 for January to 12 for December: ");
 	}
 	
+	@SuppressWarnings ("unchecked")
 	public void confirmBirthMonth(String input, String sMethodSuffix, String sMethodPrefix)
 	{
 		try {
-			final Class<?> oClass = Class.forName("FortuneTeller");
+			final Class<?> oClass = Class.forName("FortuneTellerIntake");
 			String s = sMethodPrefix + sMethodSuffix;
 			Method m = oClass.getDeclaredMethod(s, String.class);
-			Optional<Short> test = (Optional<Short>)m.invoke(null, input);
+			Optional<Short> test = (Optional<Short>)m.invoke(this, input);
 			System.out.printf("The birth month number is %d. Is that corrrect? (yes or no)\n", test.orElse((short)-1));
 			
 		} catch (ClassNotFoundException e) {
@@ -135,10 +136,10 @@ public class FortuneTellerIntake {
 	public void confirmColor(String input, String sMethodSuffix, String sMethodPrefix)
 	{
 		try {
-			final Class<?> oClass = Class.forName("FortuneTeller");
+			final Class<?> oClass = Class.forName("FortuneTellerIntake");
 			String s = sMethodPrefix + sMethodSuffix;
 			Method m = oClass.getDeclaredMethod(s, String.class);
-			Optional<String> test = Optional.ofNullable(String.valueOf(m.invoke(null, input)));
+			Optional<String> test = Optional.ofNullable(String.valueOf(m.invoke(this, input)));
 			String oOptionalOutput = test.orElse("");
 			System.out.printf(
 					"The first name is %s. Is that corrrect? (yes or no)\n",
@@ -174,13 +175,14 @@ public class FortuneTellerIntake {
 		System.out.println("Your number of siblings: ");
 	}
 	
+	@SuppressWarnings ("unchecked")
 	public void confirmSiblingQty(String input, String sMethodSuffix, String sMethodPrefix)
 	{
 		try {
-			final Class<?> oClass = Class.forName("FortuneTeller");
+			final Class<?> oClass = Class.forName("FortuneTellerIntake");
 			String s = sMethodPrefix + sMethodSuffix;
 			Method m = oClass.getDeclaredMethod(s, String.class);
-			Optional<Short> test = (Optional<Short>)m.invoke(null, input);
+			Optional<Short> test = (Optional<Short>)m.invoke(this, input);
 			System.out.printf("The number of siblings is %d. Is that corrrect? (yes or no)\n", test.orElse((short)-1));
 			
 		} catch (ClassNotFoundException e) {
@@ -224,7 +226,7 @@ public class FortuneTellerIntake {
 	
 	public boolean isSufficientInputAge(String input)
 	{
-		return ((Optional<Short>)this.parseRawAge(input)).orElse((short)-1) > -1;
+		return this.parseRawAge(input).orElse((short)-1) > -1;
 	}
 	
 	public Optional<Short> parseRawAge(String input)
@@ -272,12 +274,12 @@ public class FortuneTellerIntake {
 		return java.util.Optional.ofNullable(payload);
 	}
 	
-	private boolean isSufficientInputSiblingQty(String input)
+	public boolean isSufficientInputSiblingQty(String input)
 	{
 		return this.parseRawSiblingQty(input).orElse((short)-1)>-1;
 	}
 	
-	private Optional<Short> parseRawSiblingQty(String input)
+        public Optional<Short> parseRawSiblingQty(String input)
 	{
 		String payload = input.replaceAll("[^0-9.]", "");
 		if(payload.length()==0) {

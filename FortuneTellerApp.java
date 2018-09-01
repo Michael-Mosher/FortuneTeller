@@ -1,4 +1,4 @@
-package src.test.java;
+//package src.test.java.FortuneTeller;
 import java.util.*;
 import java.lang.reflect.*;
 import java.text.NumberFormat;
@@ -26,7 +26,6 @@ public class FortuneTellerApp {
 		final String sPromptMethod = "prompt";
 		final String sIsSufficientInputMethod = "isSufficientInput";
 		final String sParseRawMethod = "parseRaw";
-		final String sSetMethod = "set";
 		final String sConfirmMethod = "confirm";
 		// temporary string to hold the concatenated prefix + suffix
 		String sMethodName = "";
@@ -34,7 +33,7 @@ public class FortuneTellerApp {
 		String sConfirmationInput;
 		// Class object for this class to generate Methods for dynamic method invocation
 		try {
-			final Class<?> oClass = Class.forName("FortuneTeller");
+			final Class<?> oClass = Class.forName("FortuneTellerIntake");
 		
 			// The holder for Method of dynamically generated method names
 			Method oTempMethod;
@@ -70,7 +69,7 @@ public class FortuneTellerApp {
 								bConfirmed = false;
 								sInput = oInputStream.nextLine();
 							}
-	//						bConfirmed = .valueOf();
+						
 						} else if("help".matches(sInput.toLowerCase()) && sCurrentSuffix.matches("Color")) {
 							oEsmeralda.promptHelpColor();
 							oPromptMethod.invoke(oEsmeralda, null);
@@ -111,33 +110,39 @@ public class FortuneTellerApp {
 
 	}
 
+	@SuppressWarnings ("unchecked")
 	private static String getFirstName()
 	{
 		return ((Optional<String>)FortuneTellerApp.aAnswers[FortuneTellerApp.getAnswerIndex("FirstName")]).orElse("");
 	}
 	
+	@SuppressWarnings ("unchecked")
 	private static String getLastName()
 	{
 		return ((Optional<String>)FortuneTellerApp.aAnswers[FortuneTellerApp.getAnswerIndex("LastName")]).orElse("");
 	}
 	
+	@SuppressWarnings ("unchecked")
 	private static short getAge()
 	{
 		return ((Optional<Short>)FortuneTellerApp.aAnswers[FortuneTellerApp.getAnswerIndex("Age")]).orElse(Short.valueOf((short) -1));
-	}	
+	}
 	
+	@SuppressWarnings ("unchecked")
 	private static short getBirthMonth()
 	{
 		return ((Optional<Short>)FortuneTellerApp.aAnswers[FortuneTellerApp.getAnswerIndex("BirthMonth")]
 				).orElse(Short.valueOf((short) -1));
 	}
 	
+	@SuppressWarnings ("unchecked")
 	private static short getSiblingQty()
 	{
 		return ((Optional<Short>)FortuneTellerApp.aAnswers[FortuneTellerApp.getAnswerIndex("SiblingQty")]
 				).orElse((short)-1);
 	}
 	
+	@SuppressWarnings ("unchecked")
 	private static String getColor()
 	{
 		return ((Optional<String>)FortuneTellerApp.aAnswers[FortuneTellerApp.getAnswerIndex("Color")]).orElse("");
